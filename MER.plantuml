@@ -1,0 +1,25 @@
+@startuml MER
+class Tarefa {
+  +id: int
+  +titulo: String
+  +descricao: String
+  +dataHoraCriacao: DateTime
+  +status: String
+}
+
+class Categoria {
+  +id: int
+  +nome: String
+  +cor: String
+}
+
+class Usuario {
+  +id: int
+  +nome: String
+  +email: String
+  +senha: String
+}
+
+Tarefa --> Categoria : "1..*"
+Tarefa --> Usuario : "1..1"
+@enduml
