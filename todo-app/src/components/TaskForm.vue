@@ -1,10 +1,14 @@
 <template>
-    <q-form @submit="submitForm" class="q-pa-md">
-        <q-input v-model="localTask.title" label="Título" required class="q-mb-md" />
-        <q-input v-model="localTask.description" label="Descrição" type="textarea" class="q-mb-md" />
-        <!---<q-select v-model="localTask.status" :options="['Pendente', 'Em andamento', 'Concluída']" label="Status"
-            class="q-mb-md" />-->
-        <q-btn type="submit" label="Salvar" color="primary" class="full-width" />
+    <q-form @submit="submitForm" class="q-mb-md">
+        <div class="row q-col-gutter-x-md">
+            <q-input v-model="localTask.title" label="Título" required class="col-8" outlined/>
+            <q-select v-model="localTask.category" :options="['Casa', 'Estudos', 'Lazer', 'Mercado', 'Contas', 'Outros']" label="Categoria"
+                class="col-4" outlined/>
+        </div>
+        <div class="q-mt-md">
+            <q-input v-model="localTask.description" label="Descrição" outlined/>
+            <q-btn type="submit" label="Salvar" color="primary" class="full-width" />
+        </div>
     </q-form>
 </template>
 
@@ -21,22 +25,39 @@ export default {
     methods: {
         async submitForm() {
             try {
-                this.localTask.status = 'Em andamento';
-                // Envia os dados para a API com axios
-                const response = await axios.post('http://localhost:8000/api/tarefas', {
-                    titulo: this.localTask.title,
-                    descricao: this.localTask.description,
-                    status: this.localTask.status,
-                });
-                console.log('Tarefa criada com sucesso:', response.data);
+                // Define valores padrão
+                this.localTask.status = this.localTask.status || 'Em andamento';
+                this.localTask.category = this.localTask.category || 'Padrão';
 
-                // Emitir o evento para o componente pai, caso precise manipular a tarefa criada
+                let response;
+
+                if (this.localTask.id) {
+                    // Atualiza a tarefa existente
+                    response = await axios.put(`http://localhost:8000/api/tarefas/${this.localTask.id}`, {
+                        titulo: this.localTask.title,
+                        descricao: this.localTask.description,
+                        status: this.localTask.status,
+                        categoria: this.localTask.category
+                    });
+                    console.log('Tarefa atualizada com sucesso:', response.data);
+                } else {
+                    // Cria uma nova tarefa
+                    response = await axios.post('http://localhost:8000/api/tarefas', {
+                        titulo: this.localTask.title,
+                        descricao: this.localTask.description,
+                        status: this.localTask.status,
+                        categoria: this.localTask.category
+                    });
+                    console.log('Tarefa criada com sucesso:', response.data);
+                }
+
+                // Emite o evento para o componente pai
                 this.$emit('save-task', response.data);
             } catch (error) {
-                console.error('Erro ao salvar a tarefa:', error.response.data);
-                // Tratar erro (exibir mensagem para o usuário)
+                console.error('Erro ao salvar a tarefa:', error.response?.data || error.message);
+                // Exibe uma mensagem de erro para o usuário
             }
-        },
+        }
     },
     watch: {
         task(newTask) {
@@ -51,11 +72,6 @@ export default {
     background-color: #f5f5f5;
     border-radius: 8px;
     padding: 20px;
-}
-
-.q-input {
-    max-width: 400px;
-    margin: 0 auto;
 }
 
 .q-btn {

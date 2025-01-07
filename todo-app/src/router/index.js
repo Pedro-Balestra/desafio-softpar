@@ -12,7 +12,7 @@ const routes = [
     path: '/task/:id',
     name: 'TaskDetails',
     component: TaskDetails,
-    props: route => ({ id: route.params.id }), // Ajuste para passar o ID de forma explícita
+    props: true,
   },
 ];
 
