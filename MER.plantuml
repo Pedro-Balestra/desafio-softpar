@@ -10,7 +10,6 @@ class Tarefa {
 class Categoria {
   +id: int
   +nome: String
-  +cor: String
 }
 
 class Usuario {
@@ -20,6 +19,6 @@ class Usuario {
   +senha: String
 }
 
-Tarefa --> Categoria : "1..*"
-Tarefa --> Usuario : "1..1"
+Tarefa --> Categoria : "1..1"
+Tarefa --> Usuario : "1..*"
 @enduml
