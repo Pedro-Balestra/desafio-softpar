@@ -15,18 +15,22 @@ class TarefaController extends Controller
     public function store(Request $request)
     {
         $this->validateInput($request);
+
         $titulo = $request->input('titulo');
         $descricao = $request->input('descricao');
-        $status = $request->input('status', 'Em andamento');
+        $status = $request->input('status', 'Em andamento'); // Valor padrão
+        $categoria = $request->input('categoria', 'Padrao'); // Valor padrão
 
         $tarefa = Tarefa::create([
-           'titulo' => $titulo,
-           'descricao' => $descricao,
-           'status' => $status,
+            'titulo' => $titulo,
+            'descricao' => $descricao,
+            'status' => $status,
+            'categoria' => $categoria
         ]);
 
         return response()->json($tarefa, 201);
     }
+
 
     public function show($id)
     {
