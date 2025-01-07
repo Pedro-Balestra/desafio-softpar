@@ -17,9 +17,9 @@ class TarefaController extends Controller
         $this->validateInput($request);
 
         $titulo = $request->input('titulo');
-        $descricao = $request->input('descricao');
-        $status = $request->input('status', 'Em andamento'); // Valor padrão
-        $categoria = $request->input('categoria', 'Padrao'); // Valor padrão
+        $descricao = $request->input('descricao', 'Nada');
+        $status = $request->input('status', 'Em andamento');
+        $categoria = $request->input('categoria', 'Padrao');
 
         $tarefa = Tarefa::create([
             'titulo' => $titulo,
@@ -81,9 +81,10 @@ class TarefaController extends Controller
             return response()->json(['message' => 'O título deve conter apenas letras, números e espaços.'], 400)->throwResponse();
         }
 
-        if ( !preg_match('/^[a-zA-Z0-9\s\-]+$/', $descricao)) {
+        if ($descricao && !preg_match('/^[a-zA-Z0-9\s\-]+$/', $descricao)) {
             return response()->json(['message' => 'A descrição deve conter apenas letras, números e espaços.'], 400)->throwResponse();
         }
+
     }
 }
 
