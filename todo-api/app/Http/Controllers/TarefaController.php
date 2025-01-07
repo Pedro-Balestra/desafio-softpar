@@ -9,21 +9,23 @@ class TarefaController extends Controller
 {
     public function index()
     {
-
         return Tarefa::all();
     }
 
     public function store(Request $request)
     {
-         $this->validateInput($request);
+        $this->validateInput($request);
+        $titulo = $request->input('titulo');
+        $descricao = $request->input('descricao');
+        $status = $request->input('status', 'Em andamento');
 
-         $tarefa = Tarefa::create([
-            'titulo' => $titulo,
-            'descricao' => $descricao,
+        $tarefa = Tarefa::create([
+           'titulo' => $titulo,
+           'descricao' => $descricao,
+           'status' => $status,
         ]);
 
         return response()->json($tarefa, 201);
-
     }
 
     public function show($id)
@@ -53,7 +55,7 @@ class TarefaController extends Controller
         {
             return response()->json(['message' => 'Tarefa não encontrada ou já deletada'], 404);
         };
-        Tarefa::delete($id);
+        Tarefa::destroy($id);
 
         return response()->json(null, 204);
     }
