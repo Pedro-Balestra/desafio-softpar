@@ -28,7 +28,7 @@ Este projeto é uma aplicação de gerenciamento de tarefas, desenvolvida como p
 
 ### Demonstração
 
-![Demonstração da Aplicação](assets\video.gif)
+![Demonstração da Aplicação](assets/video.gif)
 
 ---
 
@@ -181,7 +181,7 @@ http://127.0.0.1:8000/api/documentation
 #### 9.3 Diagrama UML
 O diagrama abaixo descreve a arquitetura geral do sistema e como as partes se conectam:
 
-![Diagrama UML](assets\MER.png)
+![Diagrama UML](assets/MER.png)
 
 ---
 ### 10. Melhorias Futuras
