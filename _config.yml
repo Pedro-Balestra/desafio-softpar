@@ -1,0 +1,14 @@
+exclude:
+  - node_modules
+  - todo-app/node_modules
+  - dist
+  - todo-app/dist
+  - vendor
+  - "*.log"
+  - "*.tmp"
+  - "*.md"
+  - "*.lock"
+  - "*.json"
+  - "*.yml"
+  - "*.ts"
+  - "*.scss"
