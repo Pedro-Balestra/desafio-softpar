@@ -1,24 +1,35 @@
 @startuml MER
-class Tarefa {
-  +id: int
-  +titulo: String
-  +descricao: String
-  +dataHoraCriacao: DateTime
-  +status: String
+
+entity "Usuarios" as usuarios {
+    + id: UUID
+    --
+    nome: string
+    email: string
+    senha: string
+    created_at: datetime
 }
 
-class Categoria {
-  +id: int
-  +nome: String
+entity "Tarefas" as tarefas {
+    + id: UUID
+    --
+    titulo: string
+    descricao: text
+    status: enum("Pendente", "Em andamento", "Concluído")
+    categoria_id: UUID
+    usuario_id: UUID
+    completed_at: datetime
+    created_at: datetime
 }
 
-class Usuario {
-  +id: int
-  +nome: String
-  +email: String
-  +senha: String
+entity "Categorias" as categorias {
+    + id: UUID
+    --
+    nome: enum("Casa", "Estudos", "Lazer", "Mercado", "Contas", "Outros")
+    created_at: datetime
 }
 
-Tarefa --> Categoria : "1..1"
-Tarefa --> Usuario : "1..*"
+usuarios ||--o{ tarefas
+categorias ||--o{ tarefas
+
 @enduml
+
