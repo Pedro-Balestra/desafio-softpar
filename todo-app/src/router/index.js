@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '../pages/HomePage.vue';
-import TaskDetails from '../pages/TaskDetails.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import HomePage from '../pages/HomePage.vue'
+import TaskDetails from '../pages/TaskDetails.vue'
 
 const routes = [
   {
@@ -14,11 +14,11 @@ const routes = [
     component: TaskDetails,
     props: true,
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
+})
 
-export default router;
+export default router

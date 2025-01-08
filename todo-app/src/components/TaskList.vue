@@ -1,7 +1,13 @@
 <template>
   <div class="task-list">
     <q-list bordered padding>
-      <q-item v-for="task in filteredTasks" :key="task.id" clickable @click="goToDetails(task.id)" class="task-item">
+      <q-item
+        v-for="task in filteredTasks"
+        :key="task.id"
+        clickable
+        @click="goToDetails(task.id)"
+        class="task-item"
+      >
         <q-item-section>
           <q-item-label class="task-title">{{ task.titulo }}</q-item-label>
           <q-item-label caption class="task-status">Status: {{ task.status }}</q-item-label>
@@ -19,35 +25,35 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 export default {
   props: ['tasks', 'reloadTasks'],
   data() {
     return {
       selectedStatus: 'Todas',
-    };
+    }
   },
   computed: {
     filteredTasks() {
       if (this.selectedStatus === 'Todas') {
-        return this.tasks;
+        return this.tasks
       }
-      return this.tasks.filter(task => task.status === this.selectedStatus);
+      return this.tasks.filter((task) => task.status === this.selectedStatus)
     },
   },
   methods: {
     formatDate(date) {
-      return dayjs(date).format('DD/MM/YYYY HH:mm:ss'); // Formata a data em DD/MM/YYYY HH:mm:ss
+      return dayjs(date).format('DD/MM/YYYY HH:mm:ss') // Formata a data em DD/MM/YYYY HH:mm:ss
     },
     goToDetails(id) {
-      this.$router.push({ name: 'TaskDetails', params: { id } });
+      this.$router.push({ name: 'TaskDetails', params: { id } })
     },
     deleteTask(id) {
-      this.$emit('delete-task', id); // Emite um evento para o componente pai realizar a exclusão
+      this.$emit('delete-task', id) // Emite um evento para o componente pai realizar a exclusão
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -65,7 +71,9 @@ export default {
   border-radius: 8px;
   box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.15);
   margin-bottom: 8px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .task-item:hover {
