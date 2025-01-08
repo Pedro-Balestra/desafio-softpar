@@ -22,11 +22,11 @@
 11. [Autor](#autor)
 12. [Licença](#licença)
 ---
-## Descrição do Projeto
+## 1 Descrição do Projeto
 
 Este projeto é uma aplicação de gerenciamento de tarefas, desenvolvida como parte do desafio de programação da Softpar 2025. A aplicação permite criar, visualizar, atualizar e excluir tarefas, além de oferecer funcionalidades extras, como categorização e documentação interativa da API.
 
-### 1 Demonstração
+### Demonstração
 
 ![Demonstração da Aplicação](assets\video.gif)
 
