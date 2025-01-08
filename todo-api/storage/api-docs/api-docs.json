@@ -1,0 +1,291 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Gerenciamento de Tarefas",
+        "description": "API para gerenciar tarefas, categorias e status.",
+        "contact": {
+            "name": "Pedro Balestra",
+            "email": "pedro.balestra@outlook.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tarefas": {
+            "get": {
+                "tags": [
+                    "Tarefas"
+                ],
+                "summary": "Listar todas as tarefas",
+                "operationId": "78610a946743bf42d67599e1c7be6c9d",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrar tarefas pelo status.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Em andamento",
+                                "Concluído",
+                                "Pendente"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas retornada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tarefa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tarefas"
+                ],
+                "summary": "Criar uma nova tarefa",
+                "operationId": "9c624fc5ca76e8726a5aa916ffa20a16",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titulo"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string",
+                                        "example": "Minha nova tarefa"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Detalhes da tarefa"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Em andamento"
+                                    },
+                                    "categoria": {
+                                        "type": "string",
+                                        "example": "Casa"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarefa criada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarefa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tarefas/{id}": {
+            "get": {
+                "tags": [
+                    "Tarefas"
+                ],
+                "summary": "Obter os detalhes de uma tarefa",
+                "operationId": "72e79f3a2280d643e10746f652613319",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes da tarefa retornados com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarefa"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Tarefas"
+                ],
+                "summary": "Atualizar uma tarefa",
+                "operationId": "94a4dfed8bfaab8acd7a94a3fb83d41c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string",
+                                        "example": "Título atualizado"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Descrição atualizada"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Concluído"
+                                    },
+                                    "categoria": {
+                                        "type": "string",
+                                        "example": "Casa"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tarefa atualizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarefa"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tarefas"
+                ],
+                "summary": "Excluir uma tarefa",
+                "operationId": "f16da93ed753795e91bd9a505fac3db5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Tarefa excluída com sucesso."
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tarefa": {
+                "required": [
+                    "titulo"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID único da tarefa",
+                        "type": "integer"
+                    },
+                    "titulo": {
+                        "description": "Título da tarefa",
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "description": "Descrição da tarefa",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Status da tarefa",
+                        "type": "string",
+                        "enum": [
+                            "Em andamento",
+                            "Concluído",
+                            "Pendente"
+                        ]
+                    },
+                    "categoria": {
+                        "description": "Categoria da tarefa",
+                        "type": "string",
+                        "enum": [
+                            "Casa",
+                            "Estudos",
+                            "Lazer",
+                            "Mercado",
+                            "Contas",
+                            "Outros"
+                        ]
+                    },
+                    "created_at": {
+                        "description": "Data de criação",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Data da última atualização",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tarefas",
+            "description": "Tarefas"
+        }
+    ]
+}
