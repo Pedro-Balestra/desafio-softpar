@@ -41,6 +41,7 @@ export default defineConfig((/* ctx */) => {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      publicPath: '/desafio-softpar/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -58,7 +59,6 @@ export default defineConfig((/* ctx */) => {
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
-      
       vitePlugins: [
         ['vite-plugin-checker', {
           eslint: {
