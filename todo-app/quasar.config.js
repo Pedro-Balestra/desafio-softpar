@@ -41,7 +41,6 @@ export default defineConfig((/* ctx */) => {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      publicPath: '/desafio-softpar/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,

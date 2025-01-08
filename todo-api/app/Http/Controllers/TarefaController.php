@@ -236,11 +236,11 @@ class TarefaController extends Controller
             return response()->json(['message' => 'O título deve ter pelo menos 3 e no máximo 255 caracteres.'], 400)->throwResponse();
         }
 
-        if (!preg_match('/^[a-zA-Z0-9\s\-]+$/', $titulo)) {
+        if (!preg_match('/^[a-zA-Z0-9\s\-\~\^\ç\,]+$/', $titulo)) {
             return response()->json(['message' => 'O título deve conter apenas letras, números e espaços.'], 400)->throwResponse();
         }
 
-        if ($descricao && !preg_match('/^[a-zA-Z0-9\s\-]+$/', $descricao)) {
+        if ($descricao && !preg_match('/^[a-zA-Z0-9\s\-\~\^\ç\,\!\%\:\.]+$/', $descricao)) {
             return response()->json(['message' => 'A descrição deve conter apenas letras, números e espaços.'], 400)->throwResponse();
         }
     }
