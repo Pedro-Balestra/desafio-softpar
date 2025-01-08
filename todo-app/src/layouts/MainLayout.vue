@@ -10,7 +10,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          ToDo List
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -42,8 +42,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { ref } from 'vue'
 
 const linksList = [
   {

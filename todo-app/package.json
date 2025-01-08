@@ -1,8 +1,8 @@
 {
   "name": "todo-app",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "A ToDo List Project",
+  "productName": "ToDo List",
   "author": "Pedro Balestra <pedro.balestra@outlook.com>",
   "type": "module",
   "private": true,
