@@ -19,7 +19,7 @@ class TarefaController extends Controller
         $titulo = $request->input('titulo');
         $descricao = $request->input('descricao', 'Nada');
         $status = $request->input('status', 'Em andamento');
-        $categoria = $request->input('categoria', 'Padrao');
+        $categoria = $request->input('categoria', 'Outros');
 
         $tarefa = Tarefa::create([
             'titulo' => $titulo,
@@ -44,13 +44,25 @@ class TarefaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validateInput($request);
-
         $tarefa = Tarefa::findOrFail($id);
-        $tarefa->update($request->all());
 
-        return response()->json($tarefa);
+        $tarefa->titulo = $request->input('titulo', $tarefa->titulo);
+        $tarefa->descricao = $request->input('descricao', $tarefa->descricao);
+        $tarefa->status = $request->input('status', $tarefa->status);
+        $tarefa->categoria = $request->input('categoria', $tarefa->categoria);
+
+        // Define a data de conclusão se o status for "Concluído"
+        if ($tarefa->status === 'Concluído' && !$tarefa->completed_at) {
+            $tarefa->completed_at = now(); // Laravel helper para a data e hora atual
+        } elseif ($tarefa->status !== 'Concluído') {
+            $tarefa->completed_at = null; // Limpa a data se o status mudar
+        }
+
+        $tarefa->save();
+
+        return response()->json($tarefa, 200);
     }
+
 
     public function delete($id)
     {

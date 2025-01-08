@@ -14,6 +14,7 @@ class Tarefa extends Model
         'descricao',
         'status',
         'categoria',
+        'completed_at',
     ];
 
 }
